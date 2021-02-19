@@ -1,15 +1,19 @@
-import { Component, OnInit } from '@angular/core';
-
+import { Component } from '@angular/core';
+import { Reports } from '@app/mocks/data.mock';
 @Component({
   templateUrl: './balance.component.html',
   styles: [
   ]
 })
-export class BalanceComponent implements OnInit {
+export class BalanceComponent {
 
-  constructor() { }
+  visible = true;
 
-  ngOnInit(): void {
-  }
+  reports = Reports;
+
+  tabsPanel = [
+    { title: 'Seguimiento' },
+    { title: 'Archivos' }
+  ];
 
 }

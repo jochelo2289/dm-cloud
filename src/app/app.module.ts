@@ -1,7 +1,10 @@
 import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
 import { ReactiveFormsModule } from '@angular/forms';
 import { Route, RouterModule } from '@angular/router';
-import { BrowserModule } from '@angular/platform-browser';
+
+// Devextreme
+import { DxTabPanelModule, DxDataGridModule, DxGanttModule, DxTreeViewModule } from 'devextreme-angular';
 
 // Components
 import { AppComponent } from './app.component';
@@ -18,7 +21,15 @@ const Routes: Route[] = [
 
 @NgModule({
   declarations: [AppComponent, BalanceComponent, SeguimientoComponent],
-  imports: [BrowserModule, ReactiveFormsModule, RouterModule.forRoot(Routes, { useHash: true, scrollOffset: [0, 0] })],
+  imports: [
+    BrowserModule,
+    ReactiveFormsModule,
+    DxTabPanelModule,
+    DxDataGridModule,
+    DxGanttModule,
+    DxTreeViewModule,
+    RouterModule.forRoot(Routes, { useHash: true, scrollOffset: [0, 0] })
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
