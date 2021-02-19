@@ -13,10 +13,11 @@
   <div class="w-100">
     <dx-tab-panel [items]="tabsPanel" itemTitleTemplate="title" itemTemplate="tab">
       <div *dxTemplate="let i of 'title'">
-        <p>{{i.title}}</p>
+        <p class="m-0">{{i.title}}</p>
       </div>
       <div class="p-3" *dxTemplate="let i of 'tab'">
-        demo
+        {{i.title}}
+        <!-- TODO: [2021-02-18] Hacer un switch. -->
       </div>
     </dx-tab-panel>
   </div>
