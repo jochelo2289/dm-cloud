@@ -16,8 +16,8 @@ const Routes: Route[] = [
   { path: '', pathMatch: 'full', redirectTo: 'balance' },
   { path: 'balance', component: BalanceComponent },
   { path: 'seguimiento', component: SeguimientoComponent },
-  { path: '**', pathMatch: 'full', redirectTo: 'balance' },
-]
+  { path: '**', pathMatch: 'full', redirectTo: 'balance' }
+];
 
 @NgModule({
   declarations: [AppComponent, BalanceComponent, SeguimientoComponent],
@@ -32,4 +32,4 @@ const Routes: Route[] = [
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

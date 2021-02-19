@@ -9,7 +9,7 @@ export const Reports: dxTreeViewItem[] = [
         text: 'Pozo CPE-2 EST1',
         expanded: true,
         items: [
-          { text: 'Planeación', selected: true, },
+          { text: 'Planeación', selected: true },
           { text: 'Perforación' },
           { text: 'Formas Operacionales' },
           { text: 'Registros' },
@@ -192,7 +192,7 @@ export const FilesReport = [
   }
 ];
 
-export const tasks = [
+export const Tasks = [
   {
     id: 1,
     parentId: 0,

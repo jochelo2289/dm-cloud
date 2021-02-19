@@ -1,7 +1,7 @@
-<h2 class='text-primary'>Balance de Información</h2>
-<p class='text-muted col-md-10 mb-5'>
-  Módulo para el cargue y gestión de los manuales técnicos de información de pozos y sísmica a entregar al Banco
-  de Información Petrolera. Seleccione los parámetros correspondientes para cargar información.
+<h2 class="text-primary">Balance de Información</h2>
+<p class="text-muted col-md-10 mb-5">
+  Módulo para el cargue y gestión de los manuales técnicos de información de pozos y sísmica a entregar al Banco de Información Petrolera.
+  Seleccione los parámetros correspondientes para cargar información.
 </p>
 
 <!-- TODO: [2021-02-18] Hacer Formulario. -->
@@ -11,13 +11,91 @@
     <dx-tree-view [items]="reports" [searchEnabled]="true" selectionMode="single" [width]="250"></dx-tree-view>
   </div>
   <div class="w-100">
-    <dx-tab-panel [items]="tabsPanel" itemTitleTemplate="title" itemTemplate="tab">
+    <dx-tab-panel [items]="tabsPanel" itemTitleTemplate="title" itemTemplate="tab" [animationEnabled]="true">
       <div *dxTemplate="let i of 'title'">
-        <p class="m-0">{{i.title}}</p>
+        <p class="m-0">{{ i.title }}</p>
       </div>
       <div class="p-3" *dxTemplate="let i of 'tab'">
-        {{i.title}}
-        <!-- TODO: [2021-02-18] Hacer un switch. -->
+        <div [ngSwitch]="i.title">
+          <div *ngSwitchCase="'Seguimiento'">
+            <dx-gantt [taskListWidth]="500" scaleType="auto" height="400">
+              <dxo-tasks [dataSource]="tasks"></dxo-tasks>
+
+              <dxi-column dataField="title" caption="Reporte" [width]="300"></dxi-column>
+              <dxi-column dataField="start" caption="Fecha Inicio" dataType="date" [width]="100" format="dd-MM-yyyy"></dxi-column>
+              <dxi-column dataField="end" caption="Fecha Final" dataType="date" [width]="100" format="dd-MM-yyyy"></dxi-column>
+
+              <dxo-toolbar>
+                <dxi-item name="collapseAll"></dxi-item>
+                <dxi-item name="expandAll"></dxi-item>
+                <dxi-item name="separator"></dxi-item>
+                <dxi-item name="zoomIn"></dxi-item>
+                <dxi-item name="zoomOut"></dxi-item>
+              </dxo-toolbar>
+
+              <dxo-validation [autoUpdateParentTasks]="true"></dxo-validation>
+              <dxo-editing [enabled]="false"></dxo-editing>
+            </dx-gantt>
+          </div>
+
+          <div *ngSwitchDefault>
+            <dx-data-grid
+              [dataSource]="dataSource"
+              columnResizingMode="widget"
+              [columnHidingEnabled]="false"
+              [headerFilter]="{ visible: true, texts: { emptyValue: '(vacío)' } }"
+              [repaintChangesOnly]="true"
+              [showBorders]="true"
+              [allowColumnResizing]="true"
+              [rowAlternationEnabled]="true"
+              [scrolling]="{ mode: 'virtual', showScrollbar: 'always' }"
+            >
+              <dxo-filter-row [visible]="true"></dxo-filter-row>
+
+              <dxo-paging [pageSize]="10"></dxo-paging>
+              <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[10, 25, 50, 100]"></dxo-pager>
+
+              <dxi-column dataField="REPORTE" [groupIndex]="0"></dxi-column>
+              <dxi-column dataField="DOCUMENTO"></dxi-column>
+              <dxi-column
+                dataField="ESTADO"
+                cellTemplate="cellTemplateEstado"
+                alignment="center"
+                cssClass="position-relative"
+                [width]="130"
+              ></dxi-column>
+              <dxi-column dataField="OBSERVACIONES" dataType="string"></dxi-column>
+              <dxi-column dataField="CODIGO" caption="CÓDIGO" [width]="120"></dxi-column>
+              <dxi-column cellTemplate="cellTemplateActions" [width]="150"></dxi-column>
+
+              <div *dxTemplate="let d of 'cellTemplateEstado'">
+                <div
+                  class="position-absolute w-100 h-100 text-white font-weight-bold p-2"
+                  [ngClass]="{
+                    'bg-danger': d.value === 'PENDIENTE',
+                    'text-muted cursor-not-allowed': d.value === 'DESACTIVADO',
+                    'bg-success': d.value === 'OK'
+                  }"
+                  style="margin: -7px; padding: 7px"
+                >
+                  {{ d.value }}
+                </div>
+              </div>
+
+              <div *dxTemplate="let d of 'cellTemplateActions'">
+                <span [ngSwitch]="d.data.ESTADO">
+                  <div class="d-flex justify-content-between" *ngSwitchCase="'OK'" style="margin: -7px; padding: 1px 7px">
+                    <button type="button" class="btn btn-link p-0" (click)="actionButton('Ver archivo')">Ver archivo</button>
+                    <button type="button" class="btn btn-link p-0" (click)="actionButton('Enviar archivo')">Enviar</button>
+                  </div>
+                  <div class="d-flex justify-content-between" *ngSwitchCase="'PENDIENTE'" style="margin: -7px; padding: 1px 7px">
+                    <button type="button" class="btn btn-link p-0" (click)="actionButton('Cargar archivo')">Cargar archivo</button>
+                  </div>
+                </span>
+              </div>
+            </dx-data-grid>
+          </div>
+        </div>
       </div>
     </dx-tab-panel>
   </div>

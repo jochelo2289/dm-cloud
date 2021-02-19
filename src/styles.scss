@@ -1,1 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.cursor-not-allowed {
+  cursor: not-allowed;
+}
+
+td {
+  white-space: break-spaces !important;
+}
