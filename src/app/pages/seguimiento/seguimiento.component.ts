@@ -1,11 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { Capitulos } from '@app/mocks/data.mock';
 
 @Component({
   templateUrl: './seguimiento.component.html',
   styles: []
 })
-export class SeguimientoComponent implements OnInit {
-  constructor() {}
-
-  ngOnInit(): void {}
+export class SeguimientoComponent {
+  capitulos = Capitulos;
 }

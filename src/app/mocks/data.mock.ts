@@ -247,7 +247,7 @@ export const Tasks = [
   }
 ];
 
-export const capitulos = [
+export const Capitulos = [
   {
     id: 1,
     title: 'Capitulo #1'

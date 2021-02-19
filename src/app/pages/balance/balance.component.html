@@ -11,7 +11,7 @@
     <dx-tree-view [items]="reports" [searchEnabled]="true" selectionMode="single" [width]="250"></dx-tree-view>
   </div>
   <div class="w-100">
-    <dx-tab-panel [items]="tabsPanel" itemTitleTemplate="title" itemTemplate="tab" [animationEnabled]="true">
+    <dx-tab-panel [items]="tabsPanel" itemTitleTemplate="title" itemTemplate="tab">
       <div *dxTemplate="let i of 'title'">
         <p class="m-0">{{ i.title }}</p>
       </div>
@@ -57,13 +57,7 @@
 
               <dxi-column dataField="REPORTE" [groupIndex]="0"></dxi-column>
               <dxi-column dataField="DOCUMENTO"></dxi-column>
-              <dxi-column
-                dataField="ESTADO"
-                cellTemplate="cellTemplateEstado"
-                alignment="center"
-                cssClass="position-relative"
-                [width]="130"
-              ></dxi-column>
+              <dxi-column dataField="ESTADO" cellTemplate="cellTemplateEstado" cssClass="position-relative" [width]="130"></dxi-column>
               <dxi-column dataField="OBSERVACIONES" dataType="string"></dxi-column>
               <dxi-column dataField="CODIGO" caption="CÓDIGO" [width]="120"></dxi-column>
               <dxi-column cellTemplate="cellTemplateActions" [width]="150"></dxi-column>

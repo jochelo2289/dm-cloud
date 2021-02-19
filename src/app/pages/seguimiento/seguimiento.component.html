@@ -1,2 +1,37 @@
 <h2 class="text-primary">Seguimiento Interno</h2>
 <p class="text-muted col-md-10 mb-5">Módulo para la gestión de los formularios por capitulo del reporte.</p>
+
+<dx-gantt [taskListWidth]="600" scaleType="auto" height="600">
+  <dxo-tasks [dataSource]="capitulos"></dxo-tasks>
+
+  <dxi-column dataField="title" caption="Reporte" [width]="250"></dxi-column>
+  <dxi-column dataField="responsable" [width]="250"></dxi-column>
+  <dxi-column dataField="estado" cellTemplate="cellTemplateEstado" cssClass="position-relative" [width]="120"></dxi-column>
+  <dxi-column dataField="start" caption="Fecha Inicio" dataType="date" [width]="100" format="dd-MM-yyyy"></dxi-column>
+  <dxi-column dataField="end" caption="Fecha Final" dataType="date" [width]="100" format="dd-MM-yyyy"></dxi-column>
+
+  <div *dxTemplate="let d of 'cellTemplateEstado'">
+    <div
+      class="position-absolute w-100 h-100 text-white font-weight-bold p-2"
+      [ngClass]="{
+        'bg-danger': d.value === 'PENDIENTE',
+        'bg-warning text-dark': d.value === 'INCOMPLETO',
+        'bg-success': d.value === 'OK'
+      }"
+      style="margin: -7px; padding: 7px"
+    >
+      {{ d.value }}
+    </div>
+  </div>
+
+  <dxo-toolbar>
+    <dxi-item name="collapseAll"></dxi-item>
+    <dxi-item name="expandAll"></dxi-item>
+    <dxi-item name="separator"></dxi-item>
+    <dxi-item name="zoomIn"></dxi-item>
+    <dxi-item name="zoomOut"></dxi-item>
+  </dxo-toolbar>
+
+  <dxo-validation [autoUpdateParentTasks]="true"></dxo-validation>
+  <dxo-editing [enabled]="false"></dxo-editing>
+</dx-gantt>
