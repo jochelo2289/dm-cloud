@@ -4,9 +4,42 @@
   Seleccione los parámetros correspondientes para cargar información.
 </p>
 
-<!-- TODO: [2021-02-18] Hacer Formulario. -->
+<form class="mb-4" [formGroup]="formulario" (ngSubmit)="onSubmit()" ngNativeValidate>
+  <div class="row gx-2 mb-3">
+    <div class="col-md-3">
+      <div class="form-group">
+        <label> <span class="text-danger">*</span> Operadora:</label>
+        <select required class="form-control" formControlName="operadora">
+          <option value="">-- Elija uno --</option>
+          <option value="1">Operadora #1</option>
+        </select>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="form-group">
+        <label> <span class="text-danger">*</span> Contrato:</label>
+        <select required class="form-control" formControlName="contrato">
+          <option value="">-- Elija uno --</option>
+          <option value="1">Contrato #1</option>
+          <option value="2">Contrato #2</option>
+        </select>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="form-group">
+        <label> <span class="text-danger">*</span> Fecha Reporte:</label>
+        <select class="form-control" formControlName="fecha">
+          <option value="">Borrador</option>
+          <option value="1">31-12-2019</option>
+          <option value="2">31-12-2018</option>
+        </select>
+      </div>
+    </div>
+  </div>
+  <button type="submit" class="btn btn-primary">Consultar</button>
+</form>
 
-<div *ngIf="visible" class="d-md-flex justify-content-start">
+<div *ngIf="visible" class="d-md-flex justify-content-start animate__animated animate__fadeInUp animate__faster">
   <div class="border-top p-3">
     <dx-tree-view [items]="reports" [searchEnabled]="true" selectionMode="single" [width]="250"></dx-tree-view>
   </div>
